@@ -99,6 +99,16 @@ input[type="text"], input[type="tel"], input[type="number"], textarea {
   color: var(--ink);
   width: 100%;
 }
+input[type="file"] {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  width: 100%;
+  background: var(--bg-soft);
+}
 input:focus, textarea:focus {
   outline: 2px solid var(--primary);
   outline-offset: 1px;
@@ -151,7 +161,7 @@ button:hover { background: #d5771f; }
     <p>これから現場に入っていただく方へ。下記項目のご入力をお願いします。</p>
   </header>
 
-  <form action="https://formsubmit.co/dong_dong@yako-shoji.co.jp" method="POST">
+  <form action="https://formsubmit.co/dong_dong@yako-shoji.co.jp" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="_subject" value="展示会案内スタッフ エントリーシート">
     <input type="hidden" name="_captcha" value="false">
 
@@ -163,6 +173,12 @@ button:hover { background: #d5771f; }
     <label>
       <span class="label-row">フリガナ<span class="required">必須</span></span>
       <input type="text" name="name_kana" required>
+    </label>
+
+    <label>
+      <span class="label-row">顔写真<span class="required">必須</span></span>
+      <span class="hint">本人確認用です。顔がはっきり分かる写真をアップロードしてください</span>
+      <input type="file" name="photo" accept="image/*" required>
     </label>
 
     <label>

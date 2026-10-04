@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スタッフ登録エントリーシート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a2233;
+  --ink-soft: #4a5468;
+  --bg-soft: #f5f7fa;
+  --line: #e3e7ee;
+  --primary: #1e5f8c;
+  --primary-dark: #164a6d;
+  --accent: #e8862f;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  color: var(--ink);
+  background: var(--bg-soft);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 560px; margin: 0 auto; padding: 32px 20px 60px; }
+header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+header .eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: .02em;
+  margin: 0 0 8px;
+}
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 0 0 10px;
+}
+header p {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  margin: 0;
+}
+form {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.94rem;
+}
+.label-row {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+}
+.required {
+  background: #ffe3e3;
+  color: #c0392b;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+.optional {
+  background: var(--bg-soft);
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+input[type="text"], input[type="tel"], input[type="number"], textarea {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 13px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  width: 100%;
+}
+input:focus, textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+.checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 500;
+}
+.checkbox-row label {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+.checkbox-row input { width: 16px; height: 16px; }
+.hint { font-weight: 400; color: var(--ink-soft); font-size: 0.82rem; }
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 16px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(232,134,47,0.28);
+}
+button:hover { background: #d5771f; }
+.note {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  margin-top: 16px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">スタッフ登録フォーム</p>
+    <h1>展示会案内スタッフ エントリーシート</h1>
+    <p>これから現場に入っていただく方へ。下記項目のご入力をお願いします。</p>
+  </header>
+
+  <form action="https://formsubmit.co/baliuxingba@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="展示会案内スタッフ エントリーシート">
+    <input type="hidden" name="_captcha" value="false">
+
+    <label>
+      <span class="label-row">お名前<span class="required">必須</span></span>
+      <input type="text" name="name" required>
+    </label>
+
+    <label>
+      <span class="label-row">フリガナ<span class="required">必須</span></span>
+      <input type="text" name="name_kana" required>
+    </label>
+
+    <label>
+      <span class="label-row">年齢<span class="required">必須</span></span>
+      <input type="number" name="age" min="16" max="99" required>
+    </label>
+
+    <label>
+      <span class="label-row">学校名（大学・専門学校など）<span class="optional">任意</span></span>
+      <span class="hint">在学中・卒業済みいずれも可</span>
+      <input type="text" name="school" placeholder="例：〇〇大学 〇〇学部">
+    </label>
+
+    <label>
+      <span class="label-row">保有資格<span class="optional">任意</span></span>
+      <span class="hint">語学系の資格（JLPT・TOEIC等）、ガイド関連資格、運転免許など</span>
+      <input type="text" name="qualifications" placeholder="例：日本語検定2級、普通自動車免許">
+    </label>
+
+    <label>
+      <span class="label-row">電話番号<span class="required">必須</span></span>
+      <input type="tel" name="phone" required>
+    </label>
+
+    <label>
+      <span class="label-row">対応できる言語<span class="required">必須</span></span>
+      <span class="checkbox-row">
+        <label><input type="checkbox" name="language" value="日本語">日本語</label>
+        <label><input type="checkbox" name="language" value="中国語">中国語</label>
+        <label><input type="checkbox" name="language" value="英語">英語</label>
+      </span>
+    </label>
+
+    <label>
+      <span class="label-row">稼働可能な日程<span class="required">必須</span></span>
+      <span class="hint">例：9/20〜9/22は終日可、9/23は午後のみ</span>
+      <textarea name="available_dates" rows="3" required></textarea>
+    </label>
+
+    <label>
+      <span class="label-row">経験・自己PRなど<span class="optional">任意</span></span>
+      <textarea name="notes" rows="3"></textarea>
+    </label>
+
+    <button type="submit">送信する</button>
+    <p class="note">送信いただいた内容は担当者が確認し、折り返しご連絡します。</p>
+  </form>
+</div>
+</body>
+</html>

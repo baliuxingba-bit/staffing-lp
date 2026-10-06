@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>候補者プロフィール（サンプル）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a2233;
+  --ink-soft: #4a5468;
+  --bg-soft: #f5f7fa;
+  --line: #e3e7ee;
+  --primary: #1e5f8c;
+  --primary-dark: #164a6d;
+  --accent: #e8862f;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  color: var(--ink);
+  background: var(--bg-soft);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.sample-banner {
+  background: #fff3cd;
+  color: #6b4e00;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 10px 16px;
+}
+.wrap { max-width: 560px; margin: 0 auto; padding: 32px 20px 60px; }
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.card-header {
+  background: var(--primary-dark);
+  color: #fff;
+  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.card-header h1 { font-size: 1.3rem; margin: 0 0 4px; }
+.card-header .kana { font-size: 0.85rem; color: rgba(255,255,255,0.75); margin: 0; }
+.card-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+.field dt {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .03em;
+  margin-bottom: 6px;
+}
+.field dd { margin: 0; font-size: 0.98rem; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.footer-note {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<p class="sample-banner">これはテンプレートのサンプルです（架空の人物です）</p>
+<div class="wrap">
+  <div class="card">
+    <div class="card-header">
+      <div class="avatar">サ</div>
+      <div>
+        <h1>サンプル 太郎</h1>
+        <p class="kana">サンプル タロウ</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <dl class="field">
+        <dt>年齢</dt>
+        <dd>24歳</dd>
+      </dl>
+      <dl class="field">
+        <dt>対応できる言語</dt>
+        <dd class="tag-row">
+          <span class="tag">日本語</span>
+          <span class="tag">中国語</span>
+        </dd>
+      </dl>
+      <dl class="field">
+        <dt>学校名</dt>
+        <dd>〇〇大学 国際学部</dd>
+      </dl>
+      <dl class="field">
+        <dt>保有資格</dt>
+        <dd>日本語検定2級、普通自動車免許</dd>
+      </dl>
+      <dl class="field">
+        <dt>稼働可能な日程</dt>
+        <dd>9/20〜9/22は終日可、9/23は午後のみ</dd>
+      </dl>
+      <dl class="field">
+        <dt>経験・自己PR</dt>
+        <dd>イベント運営のアルバイト経験が2年あります。来場者対応が得意です。</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="footer-note">このページは株式会社八幸商事が候補者情報の確認のために発行したものです。</p>
+</div>
+</body>
+</html>

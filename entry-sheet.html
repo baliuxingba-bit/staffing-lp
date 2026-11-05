@@ -15,7 +15,9 @@
   --line: #e3e7ee;
   --primary: #1e5f8c;
   --primary-dark: #164a6d;
-  --accent: #e8862f;
+  --accent: #b85f12;
+  --accent-dark: #9c4f0d;
+  --danger: #b3261e;
   --radius: 10px;
 }
 * { box-sizing: border-box; }
@@ -27,11 +29,8 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-.wrap { max-width: 560px; margin: 0 auto; padding: 32px 20px 60px; }
-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
+.wrap { max-width: 560px; margin: 0 auto; padding: 32px 16px 60px; }
+header { text-align: center; margin-bottom: 28px; }
 header .eyebrow {
   color: var(--accent);
   font-weight: 700;
@@ -39,40 +38,28 @@ header .eyebrow {
   letter-spacing: .02em;
   margin: 0 0 8px;
 }
-header h1 {
-  font-size: 1.4rem;
-  font-weight: 900;
-  margin: 0 0 10px;
-}
-header p {
-  color: var(--ink-soft);
-  font-size: 0.92rem;
-  margin: 0;
-}
-form {
+header h1 { font-size: 1.4rem; font-weight: 900; margin: 0 0 10px; text-wrap: balance; }
+header p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
+form, .done {
   background: #fff;
   border-radius: var(--radius);
   border: 1px solid var(--line);
   padding: 28px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
-label {
+form { display: flex; flex-direction: column; gap: 20px; }
+label, fieldset {
   display: flex;
   flex-direction: column;
   gap: 8px;
   font-weight: 700;
   font-size: 0.94rem;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
 }
-.label-row {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-}
-.required {
-  background: #ffe3e3;
-  color: #c0392b;
+legend { padding: 0; margin-bottom: 8px; font-weight: 700; }
+.required, .optional {
   font-size: 0.68rem;
   font-weight: 700;
   padding: 2px 7px;
@@ -80,58 +67,85 @@ label {
   margin-left: 8px;
   white-space: nowrap;
 }
-.optional {
-  background: var(--bg-soft);
-  color: var(--ink-soft);
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 999px;
-  margin-left: 8px;
-  white-space: nowrap;
-}
+.required { background: #ffe3e3; color: var(--danger); }
+.optional { background: var(--bg-soft); color: var(--ink-soft); }
 input[type="text"], input[type="tel"], input[type="number"], textarea {
-  border: 1px solid var(--line);
+  border: 1px solid #c9d0db;
   border-radius: 6px;
   padding: 12px 13px;
   font: inherit;
+  font-weight: 400;
   font-size: 1rem;
   color: var(--ink);
   width: 100%;
+  background: #fff;
 }
-input[type="file"] {
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 10px 12px;
-  font: inherit;
-  font-size: 0.88rem;
-  color: var(--ink-soft);
-  width: 100%;
-  background: var(--bg-soft);
-}
-input:focus, textarea:focus {
+input:focus-visible, textarea:focus-visible, button:focus-visible, .photo-pick:focus-within {
   outline: 2px solid var(--primary);
   outline-offset: 1px;
 }
-.checkbox-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.hint { font-weight: 400; color: var(--ink-soft); font-size: 0.82rem; }
+
+.photo-field { display: flex; flex-direction: column; gap: 8px; }
+.photo-title { font-weight: 700; font-size: 0.94rem; }
+.photo-pick {
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  border: 1.5px dashed #b8c1cf;
+  border-radius: 8px;
+  padding: 14px;
+  cursor: pointer;
+  background: var(--bg-soft);
   font-weight: 500;
 }
+.photo-pick input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.photo-thumb {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #e6eaf0;
+  object-fit: cover;
+  display: block;
+}
+.photo-thumb[hidden] { display: none; }
+.photo-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.photo-action { color: var(--primary-dark); font-weight: 700; }
+.photo-name { color: var(--ink-soft); font-size: 0.82rem; overflow-wrap: anywhere; font-weight: 400; }
+
+.checkbox-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .checkbox-row label {
   flex-direction: row;
   align-items: center;
   gap: 6px;
   font-weight: 500;
-  border: 1px solid var(--line);
+  border: 1px solid #c9d0db;
   border-radius: 999px;
   padding: 9px 16px;
   cursor: pointer;
   font-size: 0.92rem;
 }
-.checkbox-row input { width: 16px; height: 16px; }
-.hint { font-weight: 400; color: var(--ink-soft); font-size: 0.82rem; }
+.checkbox-row input { width: 16px; height: 16px; margin: 0; }
+.checkbox-row label:has(input:checked) { border-color: var(--primary); background: #e9f2f8; }
+
+.nowrap { display: inline-block; }
+.trap { position: absolute; left: -9999px; }
+.error {
+  color: var(--danger);
+  background: #fdecea;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  margin: 0;
+}
+.error[hidden], .done[hidden], form[hidden] { display: none; }
 button {
   background: var(--accent);
   color: #fff;
@@ -142,90 +156,235 @@ button {
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(232,134,47,0.28);
 }
-button:hover { background: #d5771f; }
-.note {
-  text-align: center;
-  color: var(--ink-soft);
-  font-size: 0.78rem;
-  margin-top: 16px;
-}
+button:hover { background: var(--accent-dark); }
+button:disabled { opacity: .65; cursor: wait; }
+.note { text-align: center; color: var(--ink-soft); font-size: 0.78rem; margin: 0; }
+.done { text-align: center; }
+.done h2 { margin: 0 0 8px; font-size: 1.2rem; }
+.done p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <p class="eyebrow">スタッフ登録フォーム</p>
-    <h1>展示会案内スタッフ エントリーシート</h1>
+    <h1><span class="nowrap">展示会案内スタッフ</span> <span class="nowrap">エントリーシート</span></h1>
     <p>これから現場に入っていただく方へ。下記項目のご入力をお願いします。</p>
   </header>
 
-  <form action="https://formsubmit.co/baliuxingba@gmail.com" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="_subject" value="展示会案内スタッフ エントリーシート">
-    <input type="hidden" name="_captcha" value="false">
-
+  <form id="entry" novalidate>
     <label>
-      <span class="label-row">お名前<span class="required">必須</span></span>
-      <input type="text" name="name" required>
+      <span>お名前<span class="required">必須</span></span>
+      <input type="text" name="name" autocomplete="name" required>
     </label>
 
     <label>
-      <span class="label-row">フリガナ<span class="required">必須</span></span>
-      <input type="text" name="name_kana" required>
+      <span>フリガナ<span class="required">必須</span></span>
+      <input type="text" name="nameKana" required>
+    </label>
+
+    <div class="photo-field">
+      <span class="photo-title">顔写真<span class="required">必須</span></span>
+      <span class="hint">本人確認用です。顔がはっきり分かる写真を選んでください</span>
+      <label class="photo-pick">
+        <input type="file" id="photo" accept="image/*" aria-label="顔写真を選ぶ" required>
+        <img class="photo-thumb" id="thumb" alt="選んだ写真のプレビュー" hidden>
+        <span class="photo-text">
+          <span class="photo-action" id="photoAction">写真を選ぶ</span>
+          <span class="photo-name" id="photoName">スマホのカメラロールから選べます</span>
+        </span>
+      </label>
+    </div>
+
+    <label>
+      <span>年齢<span class="required">必須</span></span>
+      <input type="number" name="age" min="16" max="99" inputmode="numeric" required>
     </label>
 
     <label>
-      <span class="label-row">顔写真<span class="required">必須</span></span>
-      <span class="hint">本人確認用です。顔がはっきり分かる写真をアップロードしてください</span>
-      <input type="file" name="photo" accept="image/*" required>
-    </label>
-
-    <label>
-      <span class="label-row">年齢<span class="required">必須</span></span>
-      <input type="number" name="age" min="16" max="99" required>
-    </label>
-
-    <label>
-      <span class="label-row">学校名（大学・専門学校など）<span class="optional">任意</span></span>
+      <span>学校名（大学・専門学校など）<span class="optional">任意</span></span>
       <span class="hint">在学中・卒業済みいずれも可</span>
       <input type="text" name="school" placeholder="例：〇〇大学 〇〇学部">
     </label>
 
     <label>
-      <span class="label-row">保有資格<span class="optional">任意</span></span>
+      <span>保有資格<span class="optional">任意</span></span>
       <span class="hint">語学系の資格（JLPT・TOEIC等）、ガイド関連資格、運転免許など</span>
       <input type="text" name="qualifications" placeholder="例：日本語検定2級、普通自動車免許">
     </label>
 
     <label>
-      <span class="label-row">電話番号<span class="required">必須</span></span>
-      <input type="tel" name="phone" required>
+      <span>電話番号<span class="required">必須</span></span>
+      <input type="tel" name="phone" autocomplete="tel" required>
     </label>
 
-    <label>
-      <span class="label-row">対応できる言語<span class="required">必須</span></span>
-      <span class="checkbox-row">
+    <fieldset>
+      <legend>対応できる言語<span class="required">必須</span></legend>
+      <div class="checkbox-row">
         <label><input type="checkbox" name="language" value="日本語">日本語</label>
         <label><input type="checkbox" name="language" value="中国語">中国語</label>
         <label><input type="checkbox" name="language" value="英語">英語</label>
-      </span>
+      </div>
+    </fieldset>
+
+    <label>
+      <span>稼働可能な日程<span class="required">必須</span></span>
+      <span class="hint">例：11/20〜11/22は終日可、11/23は午後のみ</span>
+      <textarea name="availableDates" rows="3" required></textarea>
     </label>
 
     <label>
-      <span class="label-row">稼働可能な日程<span class="required">必須</span></span>
-      <span class="hint">例：9/20〜9/22は終日可、9/23は午後のみ</span>
-      <textarea name="available_dates" rows="3" required></textarea>
-    </label>
-
-    <label>
-      <span class="label-row">経験・自己PRなど<span class="optional">任意</span></span>
+      <span>経験・自己PRなど<span class="optional">任意</span></span>
       <textarea name="notes" rows="3"></textarea>
     </label>
 
-    <button type="submit">送信する</button>
-    <p class="note">送信いただいた内容は担当者が確認し、折り返しご連絡します。</p>
+    <label class="trap" aria-hidden="true">ウェブサイト<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+
+    <p class="error" id="error" role="alert" hidden></p>
+    <button type="submit" id="submit">送信する</button>
+    <p class="note">ご入力内容はスタッフ登録とご連絡のみに使用します。担当者が確認し、折り返しご連絡します。</p>
   </form>
+
+  <div class="done" id="done" hidden tabindex="-1">
+    <h2>送信が完了しました</h2>
+    <p>ありがとうございました。担当者が確認し、折り返しご連絡します。</p>
+  </div>
 </div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBUHHQUdnilsEBfs93l2nBFVIBn_xurCamR3YKyxSBWsctV6fnGraz_n_Fi32qptaw/exec';
+const MAX_EDGE = 1600;
+const MAX_ORIGINAL_BYTES = 10 * 1024 * 1024;
+const TIMEOUT_MS = 90000;
+
+const form = document.getElementById('entry');
+const photoInput = document.getElementById('photo');
+const thumb = document.getElementById('thumb');
+const errorBox = document.getElementById('error');
+const submitButton = document.getElementById('submit');
+
+function showError(message) {
+  errorBox.textContent = message;
+  errorBox.hidden = false;
+  errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+photoInput.addEventListener('change', () => {
+  const file = photoInput.files[0];
+  if (!file) return;
+  thumb.onerror = () => { thumb.hidden = true; };
+  thumb.src = URL.createObjectURL(file);
+  thumb.hidden = false;
+  document.getElementById('photoAction').textContent = '写真を選び直す';
+  document.getElementById('photoName').textContent = file.name;
+});
+
+function readBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(',')[1]);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+    image.src = URL.createObjectURL(file);
+  });
+}
+
+// スマホの大きな写真でも送れるように縮小する。縮小できない形式はそのまま送る
+async function preparePhoto(file) {
+  try {
+    const image = await loadImage(file);
+    const scale = Math.min(1, MAX_EDGE / Math.max(image.naturalWidth, image.naturalHeight));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(image.naturalWidth * scale);
+    canvas.height = Math.round(image.naturalHeight * scale);
+    const context = canvas.getContext('2d');
+    context.fillStyle = '#fff';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+    if (blob) return { type: 'image/jpeg', base64: await readBase64(blob) };
+  } catch (error) {
+    console.warn('写真を縮小できなかったため元のファイルを送ります', error);
+  }
+  if (file.size > MAX_ORIGINAL_BYTES) {
+    throw new Error('写真のサイズが大きすぎます。別の写真を選んでください。');
+  }
+  return { type: file.type || 'image/jpeg', base64: await readBase64(file) };
+}
+
+function findProblem() {
+  const fields = form.elements;
+  const required = [['name', 'お名前'], ['nameKana', 'フリガナ'], ['age', '年齢'], ['phone', '電話番号'], ['availableDates', '稼働可能な日程']];
+  const missing = required.filter(([key]) => !fields[key].value.trim()).map(([, label]) => label);
+  if (!photoInput.files[0]) missing.push('顔写真');
+  if (!form.querySelector('input[name="language"]:checked')) missing.push('対応できる言語');
+  if (missing.length) return '次の項目を入力してください：' + missing.join('、');
+  if (!fields.age.checkValidity()) return '年齢は16〜99の数字で入力してください。';
+  return '';
+}
+
+form.addEventListener('input', () => { errorBox.hidden = true; });
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  errorBox.hidden = true;
+
+  const problem = findProblem();
+  if (problem) return showError(problem);
+
+  submitButton.disabled = true;
+  submitButton.textContent = '送信中です…';
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+  try {
+    const fields = form.elements;
+    const payload = {
+      name: fields.name.value,
+      nameKana: fields.nameKana.value,
+      age: fields.age.value,
+      school: fields.school.value,
+      qualifications: fields.qualifications.value,
+      phone: fields.phone.value,
+      languages: [...form.querySelectorAll('input[name="language"]:checked')].map((box) => box.value).join('、'),
+      availableDates: fields.availableDates.value,
+      notes: fields.notes.value,
+      website: fields.website.value,
+      photo: await preparePhoto(photoInput.files[0]),
+    };
+    // text/plainで送るとApps Scriptへのクロスオリジン送信でプリフライトが起きない
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+    const result = await response.json();
+    if (!result.ok) throw new Error(result.error || '送信できませんでした。');
+
+    form.hidden = true;
+    const done = document.getElementById('done');
+    done.hidden = false;
+    done.focus();
+    window.scrollTo({ top: 0 });
+  } catch (error) {
+    const known = error instanceof Error && /[ぁ-ん]/.test(error.message);
+    showError((known ? error.message : '送信できませんでした。') + ' 入力内容は残っています。通信環境を確認して、もう一度「送信する」を押してください。');
+    submitButton.disabled = false;
+    submitButton.textContent = '送信する';
+  } finally {
+    clearTimeout(timer);
+  }
+});
+</script>
 </body>
 </html>

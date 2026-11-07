@@ -69,7 +69,7 @@ legend { padding: 0; margin-bottom: 8px; font-weight: 700; }
 }
 .required { background: #ffe3e3; color: var(--danger); }
 .optional { background: var(--bg-soft); color: var(--ink-soft); }
-input[type="text"], input[type="tel"], input[type="number"], textarea {
+input[type="text"], input[type="tel"], input[type="email"], input[type="number"], textarea {
   border: 1px solid #c9d0db;
   border-radius: 6px;
   padding: 12px 13px;
@@ -219,6 +219,11 @@ button:disabled { opacity: .65; cursor: wait; }
       <input type="tel" name="phone" autocomplete="tel" required>
     </label>
 
+    <label>
+      <span>メールアドレス<span class="required">必須</span></span>
+      <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="例：name@example.com" required>
+    </label>
+
     <fieldset>
       <legend>対応できる言語<span class="required">必須</span></legend>
       <div class="checkbox-row">
@@ -323,12 +328,13 @@ async function preparePhoto(file) {
 
 function findProblem() {
   const fields = form.elements;
-  const required = [['name', 'お名前'], ['nameKana', 'フリガナ'], ['age', '年齢'], ['phone', '電話番号'], ['availableDates', '稼働可能な日程']];
+  const required = [['name', 'お名前'], ['nameKana', 'フリガナ'], ['age', '年齢'], ['phone', '電話番号'], ['email', 'メールアドレス'], ['availableDates', '稼働可能な日程']];
   const missing = required.filter(([key]) => !fields[key].value.trim()).map(([, label]) => label);
   if (!photoInput.files[0]) missing.push('顔写真');
   if (!form.querySelector('input[name="language"]:checked')) missing.push('対応できる言語');
   if (missing.length) return '次の項目を入力してください：' + missing.join('、');
   if (!fields.age.checkValidity()) return '年齢は16〜99の数字で入力してください。';
+  if (!fields.email.checkValidity()) return 'メールアドレスの形式を確認してください。';
   return '';
 }
 
@@ -355,6 +361,7 @@ form.addEventListener('submit', async (event) => {
       school: fields.school.value,
       qualifications: fields.qualifications.value,
       phone: fields.phone.value,
+      email: fields.email.value,
       languages: [...form.querySelectorAll('input[name="language"]:checked')].map((box) => box.value).join('、'),
       availableDates: fields.availableDates.value,
       notes: fields.notes.value,
